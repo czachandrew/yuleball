@@ -1,10 +1,12 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
+  <ToastManager />
+  <NavBar />
   <router-view />
 </template>
+<script lang="ts" setup>
+import NavBar from "@/components/NavBar.vue";
+import ToastManager from "@/components/toast/ToastManager.vue";
+</script>
 
 <style>
 #app {
