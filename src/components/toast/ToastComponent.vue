@@ -31,19 +31,22 @@
 </template>
 <script lang="ts" setup>
 import { defineEmits } from "vue";
-import { useStore } from "vuex";
+import { useStore } from "@/store/index";
 //this is the stupid part that will just accept the content that we are supposed to have
 const props = defineProps({
   message: String,
   timestamp: String,
   title: String,
-  index: Number,
+  id: {
+    type: String,
+    required: true
+  }
 });
 
 const store = useStore();
 
 setTimeout(() => {
-  store.commit("destroyToast", props.index);
+  store.destroyToast(props.id);
 }, 3000);
 
 const emit = defineEmits(["close"]);

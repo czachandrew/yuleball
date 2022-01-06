@@ -1,19 +1,20 @@
 <template>
   <div>
-    <div v-for="(toast, index) in toasts" :key="index">
+    <div class="mb-4" v-for="(toast, index) in toasts" :key="index">
       <ToastComponent
         :message="toast.message"
         timestamp="Just Now"
         :title="toast.title"
-        :index="index"
+        :id="toast.id"
       />
     </div>
   </div>
 </template>
 <script lang="ts" setup>
+import ToastComponent from "@/components/toast/ToastComponent.vue";
+
 import { computed } from "vue";
-import { useStore } from "vuex";
-import ToastComponent from "@/components/toast/ToastComonent.vue";
+import { useStore } from "@/store/index";
 const store = useStore();
-const toasts = computed(() => store.state.toasts);
+const toasts = computed(() => store.toasts);
 </script>

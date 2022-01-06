@@ -12,31 +12,45 @@
   </button>
 </template>
 <script lang="ts" setup>
-import { useStore } from "vuex";
+import { useStore } from "@/store/index";
+import { useHousecup, House } from "@/store/housecup";
 import { computed, ref } from "vue";
 
 const props = defineProps({
   house: {
     type: String,
-    required: true,
-  },
+    required: true
+  }
 });
 const store = useStore();
+const cupStore = useHousecup();
 
 const filler = ref(25);
 
-const points = computed(() => store.state.housecup[props.house].points);
+const points = computed(() => cupStore.housePoints(props.house as House));
+
+const makeid = (length: number) => {
+  var result = "";
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+};
 
 const addPoints = (amt: number) => {
   if (filler.value < 100) filler.value += 10;
-  store.dispatch("managePointIncrease", {
-    house: props.house,
-    points: amt,
+  cupStore.managePointIncrease({
+    house: props.house as House,
+    points: amt
   });
-  store.commit("addToast", {
+  const toastId = store.addToast({
+    id: makeid(5),
     title: "Test",
     message: "This is a test message",
-    timestamp: "Just Now",
+    timestamp: "Just Now"
   });
 };
 </script>
