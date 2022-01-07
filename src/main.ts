@@ -5,4 +5,7 @@ import { createPinia } from "pinia";
 import "./main.css";
 import "tw-elements";
 
-createApp(App).use(createPinia()).use(router).mount("#app");
+const pinia = createPinia();
+
+const app = createApp(App);
+app.use(pinia).use(router).mount("#app");

@@ -8,6 +8,4 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
-const message = "This is the message sir";
-</script>
+<script setup lang="ts"></script>

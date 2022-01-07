@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url("http://fonts.cdnfonts.com/css/harry-potter");
+
+.ruby {
+  background-image: url("./assets/ruby.jpeg");
+}
+
+.emerald {
+  background-image: url("./assets/emerald.jpeg");
+}
+
+.topaz {
+  background-image: url("./assets/topaz.jpeg");
+}
+
+.saphire {
+  background-image: url("./assets/saphire.jpeg");
+}
+
+.potterize {
+  font-family: "Harry Potter", sans-serif;
+}

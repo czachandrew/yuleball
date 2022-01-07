@@ -1,7 +1,9 @@
 <template>
   <div>
-    <div class="mb-4" v-for="(toast, index) in toasts" :key="index">
+    <div class="absolute top-4 left-4">
       <ToastComponent
+        v-for="(toast, index) in toasts"
+        :key="index"
         :message="toast.message"
         timestamp="Just Now"
         :title="toast.title"

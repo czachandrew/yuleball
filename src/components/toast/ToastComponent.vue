@@ -1,7 +1,7 @@
 <template>
-  <div class="flex space-x-2 justify-center">
+  <div class="flex space-x-2 justify-center mb-4">
     <div
-      class="bg-white shadow-lg mx-auto w-96 max-w-full text-sm pointer-events-auto bg-clip-padding rounded-lg block"
+      class="bg-white shadow-lg mx-auto w-96 max-w-full text-sm pointer-events-auto bg-clip-padding rounded-lg block animate-fade-in-up"
       id="static-example"
       role="alert"
       aria-live="assertive"
@@ -39,8 +39,8 @@ const props = defineProps({
   title: String,
   id: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const store = useStore();
