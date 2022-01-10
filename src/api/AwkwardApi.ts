@@ -132,6 +132,15 @@ export class AwkwardApi {
     }
   }
 
+  async checkSlug(slug: string): Promise<any> {
+    try {
+      const response = await axios.get(`${baseUrl}anchors/${slug}/`);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
   async getHouses(): Promise<any> {
     try {
       const response = await axios.get(`${baseUrl}houses/`);

@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import Home from "../views/Home.vue";
 import HouseCup from "../views/HouseCup.vue";
 import Maze from "../views/Maze.vue";
+import ScanManager from "../views/ScanManager.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -33,6 +34,12 @@ const routes: Array<RouteRecordRaw> = [
     path: "/login",
     name: "Login",
     component: Login,
+  },
+  {
+    path: "/scan/:slug",
+    props: true,
+    name: "Scan",
+    component: ScanManager,
   },
 ];
 
