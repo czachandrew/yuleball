@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import Router from "@/router/index";
 
 const baseUrl = "http://127.0.0.1:8000/api/";
@@ -8,7 +8,7 @@ const axiosInstance = axios.create({
   timeout: 20000,
   headers: {
     Authorization: localStorage.getItem("token")
-      ? "JWT " + localStorage.getItem("token")
+      ? "Bearer " + localStorage.getItem("token")
       : "",
     "Content-Type": "application/json",
     accept: "application/json",
@@ -18,7 +18,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(function (config: AxiosRequestConfig) {
   const token = localStorage.getItem("token");
   if (config.headers) {
-    config.headers.Authorization = token ? `JWT ${token}` : "";
+    config.headers.Authorization = token ? `Bearer ${token}` : "";
   }
 
   return config;
@@ -99,6 +99,31 @@ interface AwkwardToken {
   refresh: string;
 }
 
+export interface Objective {
+  id: number;
+  title: string;
+  description: string;
+  anchor: string;
+  game: any;
+  next: Objective;
+}
+
+export interface Award {
+  description: string;
+  anchor: string;
+  fixed_amount: boolean;
+  amount: number;
+  status: string;
+  reusable: boolean;
+}
+
+export interface ObjectiveResults {
+  count: number;
+  next: string;
+  previous: string;
+  results: Objective[];
+}
+
 export class AwkwardApi {
   constructor() {
     console.log("Constructing API instance...");
@@ -124,7 +149,7 @@ export class AwkwardApi {
 
   async getUsers(): Promise<any> {
     try {
-      const response = await axios.get(`${baseUrl}users/`);
+      const response = await axiosInstance.get(`${baseUrl}users/`);
       console.log(response.data);
     } catch (error) {
       console.log(error);
@@ -134,16 +159,40 @@ export class AwkwardApi {
 
   async checkSlug(slug: string): Promise<any> {
     try {
-      const response = await axios.get(`${baseUrl}anchors/${slug}/`);
-    } catch (error) {
-      console.log(error);
-      throw error;
+      const response = await axiosInstance.post(`${baseUrl}slugcheck/`, {
+        slug: slug,
+      });
+      return response.data;
+    } catch (error: any) {
+      if (error.response) {
+        throw Error(error.response.status);
+      } else {
+        throw error;
+      }
     }
   }
 
   async getHouses(): Promise<any> {
     try {
-      const response = await axios.get(`${baseUrl}houses/`);
+      const response = await axiosInstance.get(`${baseUrl}houses/`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getAllObjectives(): Promise<any> {
+    try {
+      const response = await axiosInstance.get(`${baseUrl}objectives/`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getAllAwards(): Promise<any> {
+    try {
+      const response = await axiosInstance.get(`${baseUrl}awards/`);
       return response.data;
     } catch (error) {
       console.log(error);
