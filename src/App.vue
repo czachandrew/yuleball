@@ -2,6 +2,9 @@
   <div :class="leaderBgClass">
     <ToastManager />
     <NavBar />
+    <h4 class="position-fixed origin-top-right" v-if="store.$state.user">
+      {{ store.$state.user.first_name }}
+    </h4>
     <div class="container">
       <router-view />
     </div>
@@ -13,6 +16,7 @@ import ToastManager from "@/components/toast/ToastManager.vue";
 import Pusher from "pusher-js";
 import { ref, computed } from "vue";
 import { useHousecup } from "@/store/housecup";
+import { useStore } from "./store";
 
 Pusher.logToConsole = true;
 
@@ -31,6 +35,7 @@ channel.bind("add", (data: any) => {
 });
 
 const cup = useHousecup();
+const store = useStore();
 
 // const leaderBgClass = ref("hufflepuff");
 

@@ -2,6 +2,7 @@
   <div class="bg-white flex-auto">
     {{ activeAwards }}
     Total Awards: {{ activeAwards.count }}
+    <CreateAwardForm />
     <div
       class="rounded-t-xl overflow-hidden bg-gradient-to-r from-emerald-50 to-teal-100 p-10"
     >
@@ -39,7 +40,14 @@
             </td>
             <td
               class="border border-emerald-500 px-4 py-2 text-emerald-600 font-medium"
-            ></td>
+            >
+              <button
+                class="bg-red-500 p-4 rounded-lg shadow-sm"
+                @click="destroy(award.id)"
+              >
+                Delete
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -49,6 +57,7 @@
 <script lang="ts" setup>
 import { Award, AwkwardApi } from "@/api/AwkwardApi";
 import { ref } from "vue";
+import CreateAwardForm from "@/components/forms/CreateAwardForm.vue";
 const api = new AwkwardApi();
 const activeAwards = ref([] as Award[]);
 
@@ -61,4 +70,12 @@ api
   .catch((error) => {
     console.log(error);
   });
+
+async function destroy(id: number): Promise<void> {
+  try {
+    const result = await api.destroyAward(id);
+  } catch (error) {
+    console.log(error);
+  }
+}
 </script>

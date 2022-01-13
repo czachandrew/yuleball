@@ -30,6 +30,8 @@
 import { ref } from "vue";
 import { AwkwardApi } from "@/api/AwkwardApi";
 import { useRouter } from "vue-router";
+import { useStore } from "@/store";
+const store = useStore();
 function logData() {
   console.log(email.value, password.value);
 }
@@ -43,15 +45,23 @@ const api = new AwkwardApi();
 
 async function login() {
   try {
-    const token = await api.login(email.value, password.value);
-    console.log("token");
-    const fetchData = await api.getHouses();
+    const tokens = await store.login(email.value, password.value);
+    console.log("here are the tokens");
+    console.log(tokens);
     router.push("/cup");
-  } catch (error: any) {
+  } catch (error) {
     console.log(error);
-    showError.value = true;
-    errorMessage.value = "Check Username and email and try again";
-    console.log(error.value);
   }
+  // try {
+  //   const token = await api.login(email.value, password.value);
+  //   console.log("token");
+  //   const fetchData = await api.getHouses();
+  //   router.push("/cup");
+  // } catch (error: any) {
+  //   console.log(error);
+  //   showError.value = true;
+  //   errorMessage.value = "Check Username and email and try again";
+  //   console.log(error.value);
+  // }
 }
 </script>

@@ -1,8 +1,5 @@
 import { defineStore } from "pinia";
 import { useStore } from "./index";
-import { AwkwardApi } from "@/api/AwkwardApi";
-
-const api = new AwkwardApi();
 
 export enum House {
   Gryfindor = "gryfindor",

@@ -1,4 +1,7 @@
+import { AwkwardApi } from "@/api/AwkwardApi";
 import { defineStore } from "pinia";
+
+const api = new AwkwardApi();
 
 interface Toast {
   id: string;
@@ -35,6 +38,27 @@ export const useStore = defineStore("main", {
     destroyToast(toastId: string) {
       const index = this.toasts.findIndex((ele) => ele.id === toastId);
       this.toasts.splice(index, 1);
+    },
+    async login(email: string, password: string) {
+      try {
+        const tokens = await api.login(email, password);
+        const details = await api.currentUser();
+        console.log(tokens);
+        console.log(details);
+        return tokens;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    manageLoginSuccess(user: User) {
+      this.user = user;
+      this.loggedIn = true;
+    },
+    manageLogout() {
+      this.user = null;
+      this.loggedIn = false;
+      localStorage.removeItem("access");
+      localStorage.removeItem("refresh");
     },
   },
 });

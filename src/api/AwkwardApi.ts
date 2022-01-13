@@ -1,8 +1,9 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import Router from "@/router/index";
+import { useStore } from "@/store/index";
 
-// const baseUrl = "http://127.0.0.1:8000/api/";
-const baseUrl = "https://yule-ball.herokuapp.com/api/";
+const baseUrl = "http://127.0.0.1:8000/api/";
+// const baseUrl = "https://yule-ball.herokuapp.com/api/";
 
 const axiosInstance = axios.create({
   baseURL: baseUrl,
@@ -121,6 +122,14 @@ export interface Award {
   image_url: string | null;
 }
 
+export interface AwardPayload {
+  description: string;
+  anchor: string;
+  amount: number;
+  reusable: boolean;
+  image?: string;
+}
+
 export interface ObjectiveResults {
   count: number;
   next: string;
@@ -155,6 +164,17 @@ export class AwkwardApi {
     try {
       const response = await axiosInstance.get(`${baseUrl}users/`);
       console.log(response.data);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  async currentUser(): Promise<any> {
+    try {
+      const response = await axiosInstance.get(`${baseUrl}details/`);
+      console.log(response);
+      return response.data;
     } catch (error) {
       console.log(error);
       throw error;
@@ -221,6 +241,37 @@ export class AwkwardApi {
       return response.data;
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  async destroyAward(id: number): Promise<any> {
+    try {
+      const response = await axiosInstance.delete(`${baseUrl}awards/${id}/`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  async createAward(award: AwardPayload): Promise<Award> {
+    try {
+      const data = new FormData();
+      if (award.image && award.image !== "") {
+        data.append("image", award.image);
+      }
+      data.append("description", award.description);
+      data.append("anchor", award.anchor);
+      data.append("amount", String(award.amount));
+      data.append("reusable", String(award.reusable));
+
+      const response = await axiosInstance.post(`${baseUrl}awards/`, data);
+      console.log(response);
+
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
   }
 }
