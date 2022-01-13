@@ -5,6 +5,8 @@ import HouseCup from "../views/HouseCup.vue";
 import Maze from "../views/Maze.vue";
 import ScanManager from "../views/ScanManager.vue";
 import Admin from "../views/Admin.vue";
+import Register from "../views/Register.vue";
+import StaffVue from "@/views/Staff.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -46,6 +48,16 @@ const routes: Array<RouteRecordRaw> = [
     path: "/admin",
     name: "Admin",
     component: Admin,
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register,
+  },
+  {
+    path: "/staff",
+    name: "Staff",
+    component: StaffVue,
   },
 ];
 

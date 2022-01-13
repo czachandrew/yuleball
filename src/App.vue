@@ -2,7 +2,9 @@
   <div :class="leaderBgClass">
     <ToastManager />
     <NavBar />
-    <router-view />
+    <div class="container">
+      <router-view />
+    </div>
   </div>
 </template>
 <script lang="ts" setup>

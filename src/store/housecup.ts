@@ -1,5 +1,8 @@
 import { defineStore } from "pinia";
 import { useStore } from "./index";
+import { AwkwardApi } from "@/api/AwkwardApi";
+
+const api = new AwkwardApi();
 
 export enum House {
   Gryfindor = "gryfindor",
@@ -9,6 +12,7 @@ export enum House {
 }
 
 interface Score {
+  id: number;
   points: number;
   ratio: number;
   friendly_name: string;
@@ -45,21 +49,25 @@ function capitalizeFirstLetter(string: string): string {
 export const useHousecup = defineStore("housecup", {
   state: (): State => ({
     gryfindor: {
+      id: 1,
       points: 0,
       ratio: 0,
       friendly_name: "Gryfindor",
     },
     hufflepuff: {
+      id: 2,
       points: 0,
       ratio: 0,
       friendly_name: "Hufflepuff",
     },
     slytherin: {
+      id: 3,
       points: 1,
       ratio: 0,
       friendly_name: "Slytherin",
     },
     ravenclaw: {
+      id: 4,
       points: 0,
       ratio: 0,
       friendly_name: "Ravenclaw",
@@ -80,6 +88,9 @@ export const useHousecup = defineStore("housecup", {
     },
     housePointsRatio: (state: State) => (house: House) => {
       return state[house].ratio;
+    },
+    houseId: (state: State) => (house: House) => {
+      return state[house].id;
     },
     leader: (state: State) => {
       const array = [

@@ -1,7 +1,8 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import Router from "@/router/index";
 
-const baseUrl = "http://127.0.0.1:8000/api/";
+// const baseUrl = "http://127.0.0.1:8000/api/";
+const baseUrl = "https://yule-ball.herokuapp.com/api/";
 
 const axiosInstance = axios.create({
   baseURL: baseUrl,
@@ -106,6 +107,7 @@ export interface Objective {
   anchor: string;
   game: any;
   next: Objective;
+  image: string;
 }
 
 export interface Award {
@@ -115,6 +117,8 @@ export interface Award {
   amount: number;
   status: string;
   reusable: boolean;
+  image: string;
+  image_url: string | null;
 }
 
 export interface ObjectiveResults {
@@ -154,6 +158,27 @@ export class AwkwardApi {
     } catch (error) {
       console.log(error);
       throw error;
+    }
+  }
+
+  //type, description, amount, house
+
+  async addPoints(
+    amount: number,
+    house: number,
+    type = "staff_award"
+  ): Promise<any> {
+    try {
+      const payload = {
+        type: type,
+        house: house,
+        amount: amount,
+        user: 1,
+        description: "For uncommon valor",
+      };
+      const response = await axiosInstance.post(`${baseUrl}events/`, payload);
+    } catch (error) {
+      console.log(error);
     }
   }
 

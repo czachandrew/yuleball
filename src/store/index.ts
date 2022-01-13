@@ -7,15 +7,26 @@ interface Toast {
   timestamp: string;
 }
 
+interface User {
+  email: string;
+  first_name: string;
+  house: { name: string; points: number };
+  is_champion: boolean;
+}
+
 interface State {
   test: string;
   toasts: Toast[];
+  user: User | null;
+  loggedIn: boolean;
 }
 
 export const useStore = defineStore("main", {
   state: (): State => ({
     test: "this is a test",
     toasts: Array<Toast>(),
+    loggedIn: false,
+    user: null,
   }),
   actions: {
     addToast(toast: Toast) {

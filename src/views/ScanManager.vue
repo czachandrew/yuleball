@@ -3,8 +3,16 @@
     Scan Page
     <p class="font-bold text-xl potterize" v-if="!loaded">Loading</p>
     <div class="font-bold" v-else>
-      {{ props.slug }} {{ returnValue }}
-      <MazeHubVue v-if="returnValue.type === 'objective'"></MazeHubVue>
+      <!-- {{ props.slug }} {{ returnValue.data }} {{ returnValue }} -->
+      <MazeHubVue
+        v-if="returnValue.type === 'objective'"
+        :objective="returnValue.data"
+        :message="returnValue.message"
+      ></MazeHubVue>
+      <AwardHub
+        v-if="returnValue.type === 'award'"
+        :award="returnValue.data"
+      ></AwardHub>
     </div>
 
     <GenericModalVue
@@ -28,6 +36,7 @@ import { AwkwardApi } from "@/api/AwkwardApi";
 import { useRouter } from "vue-router";
 import GenericModalVue from "@/components/modal/GenericModal.vue";
 import MazeHubVue from "@/components/maze/MazeHub.vue";
+import AwardHub from "@/components/award/AwardHub.vue";
 const api = new AwkwardApi();
 const router = useRouter();
 

@@ -1,37 +1,41 @@
 <template>
-  <!-- All the objectives and their codes -->
-  <!-- All the Awards and their codes -->
-  <div class="bg-white" v-if="current.results.length > 0">
-    <PointsHubVue />
-    {{ current.results[0].title }}
+  <div class="bg-white flex-auto">
+    {{ activeAwards }}
+    Total Awards: {{ activeAwards.count }}
     <div
       class="rounded-t-xl overflow-hidden bg-gradient-to-r from-emerald-50 to-teal-100 p-10"
     >
       <table class="table-auto">
         <thead>
           <tr>
-            <th class="px-4 py-2">Description</th>
+            <th class="px-4 py-2">Award</th>
             <th class="px-4 py-2">Anchor</th>
+            <th class="px-4 py-2">Amount</th>
             <th class="px-4 py-2">Status</th>
-            <th></th>
+            <th class="px-4 py-2">Code</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(objective, key) in current.results" :key="key">
+          <tr v-for="(award, key) in activeAwards.results" :key="key">
             <td
               class="border border-emerald-500 px-4 py-2 text-emerald-600 font-medium"
             >
-              {{ objective.title }}
+              {{ award.description }}
             </td>
             <td
               class="border border-emerald-500 px-4 py-2 text-emerald-600 font-medium"
             >
-              {{ objective.anchor }}
+              {{ award.anchor }}
             </td>
             <td
               class="border border-emerald-500 px-4 py-2 text-emerald-600 font-medium"
             >
-              <QrcodeVue :value="objective.anchor"></QrcodeVue>
+              {{ award.amount }}
+            </td>
+            <td
+              class="border border-emerald-500 px-4 py-2 text-emerald-600 font-medium"
+            >
+              {{ award.status }}
             </td>
             <td
               class="border border-emerald-500 px-4 py-2 text-emerald-600 font-medium"
@@ -41,19 +45,20 @@
       </table>
     </div>
   </div>
-  <!-- Link to live event admin -->
 </template>
 <script lang="ts" setup>
-import { AwkwardApi, Objective } from "@/api/AwkwardApi";
-import QrcodeVue from "qrcode.vue";
-import PointsHubVue from "./PointsHub.vue";
+import { Award, AwkwardApi } from "@/api/AwkwardApi";
 import { ref } from "vue";
-
-const current = ref({ results: [] as Objective[] });
-
 const api = new AwkwardApi();
-api.getAllObjectives().then((response) => {
-  console.log(response);
-  current.value = response;
-});
+const activeAwards = ref([] as Award[]);
+
+api
+  .getAllAwards()
+  .then((awards) => {
+    console.log(awards);
+    activeAwards.value = awards;
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 </script>
