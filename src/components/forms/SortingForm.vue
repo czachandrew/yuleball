@@ -58,7 +58,10 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { AwkwardApi } from "@/api/AwkwardApi";
 import { ref } from "vue";
+
+const api = new AwkwardApi();
 
 const houses = ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"];
 
@@ -72,7 +75,9 @@ const error = ref("");
 function submit() {
   if (password.value !== password_confirm.value) {
     error.value = "Passwords must match";
+    return;
   }
   console.log("Submitting the form");
+  api.registerUser(email.value, first_name.value, password.value, house.value);
 }
 </script>

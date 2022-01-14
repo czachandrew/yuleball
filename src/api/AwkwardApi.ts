@@ -2,8 +2,8 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import Router from "@/router/index";
 import { useStore } from "@/store/index";
 
-const baseUrl = "http://127.0.0.1:8000/api/";
-// const baseUrl = "https://yule-ball.herokuapp.com/api/";
+// const baseUrl = "http://127.0.0.1:8000/api/";
+const baseUrl = "https://yule-ball.herokuapp.com/api/";
 
 const axiosInstance = axios.create({
   baseURL: baseUrl,
@@ -13,8 +13,8 @@ const axiosInstance = axios.create({
       ? "Bearer " + localStorage.getItem("token")
       : "",
     "Content-Type": "application/json",
-    accept: "application/json",
-  },
+    accept: "application/json"
+  }
 });
 
 axiosInstance.interceptors.request.use(function (config: AxiosRequestConfig) {
@@ -142,11 +142,30 @@ export class AwkwardApi {
     console.log("Constructing API instance...");
   }
 
+  async registerUser(
+    email: string,
+    first_name: string,
+    password: string,
+    house: string
+  ) {
+    try {
+      const response = await axios.post(baseUrl + "users/", {
+        email,
+        first_name,
+        password,
+        house
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async login(email: string, password: string): Promise<AwkwardToken> {
     try {
       const response = await axios.post(baseUrl + "token/", {
         email: email,
-        password: password,
+        password: password
       });
       console.log("here is the loging response");
       console.log(response.data);
@@ -194,7 +213,7 @@ export class AwkwardApi {
         house: house,
         amount: amount,
         user: 1,
-        description: "For uncommon valor",
+        description: "For uncommon valor"
       };
       const response = await axiosInstance.post(`${baseUrl}events/`, payload);
     } catch (error) {
@@ -205,7 +224,7 @@ export class AwkwardApi {
   async checkSlug(slug: string): Promise<any> {
     try {
       const response = await axiosInstance.post(`${baseUrl}slugcheck/`, {
-        slug: slug,
+        slug: slug
       });
       return response.data;
     } catch (error: any) {

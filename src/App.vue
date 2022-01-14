@@ -2,8 +2,9 @@
   <div :class="leaderBgClass">
     <ToastManager />
     <NavBar />
-    <h4 class="position-fixed origin-top-right" v-if="store.$state.user">
-      {{ store.$state.user.first_name }}
+    {{ currentRoute.name }}
+    <h4 class="position-fixed origin-top-right" v-if="userName">
+      {{ userName }}
     </h4>
     <div class="container">
       <router-view />
@@ -16,12 +17,13 @@ import ToastManager from "@/components/toast/ToastManager.vue";
 import Pusher from "pusher-js";
 import { ref, computed } from "vue";
 import { useHousecup } from "@/store/housecup";
-import { useStore } from "./store";
+import { useStore } from "@/store";
+import { useRouter } from "vue-router";
 
 Pusher.logToConsole = true;
 
 const pusher = new Pusher("826e6461d4ededca1c3a", {
-  cluster: "mt1",
+  cluster: "mt1"
 });
 
 const channel = pusher.subscribe("house-points");
@@ -30,31 +32,39 @@ channel.bind("add", (data: any) => {
   cup.managePointIncrease({
     house: data.house_data.name.toLowerCase(),
     points: data.amount,
-    from: data.user,
+    from: data.user
   });
 });
 
 const cup = useHousecup();
 const store = useStore();
+const router = useRouter();
+console.log(router.currentRoute.value);
+
+const userName = computed(() => store.user?.first_name);
+const currentRoute = computed(() => router.currentRoute.value.name);
 
 // const leaderBgClass = ref("hufflepuff");
 
 const leaderBgClass = computed(() => {
-  let value = "gryfindor h-screen";
-  switch (cup.leader.friendly_name) {
-    case "Gryfindor":
-      value = "gryfindor h-screen";
-      break;
-    case "Slytherin":
-      value = "slytherin h-screen";
-      break;
-    case "Ravenclaw":
-      value = "ravenclaw h-screen";
-      break;
-    default:
-      value = "hufflepuff h-screen";
-      break;
+  let value = "h-screen";
+  if (currentRoute.value === "HouseCup") {
+    switch (cup.leader.friendly_name) {
+      case "Gryfindor":
+        value = "gryfindor h-screen";
+        break;
+      case "Slytherin":
+        value = "slytherin h-screen";
+        break;
+      case "Ravenclaw":
+        value = "ravenclaw h-screen";
+        break;
+      default:
+        value = "hufflepuff h-screen";
+        break;
+    }
   }
+
   return value;
 });
 </script>

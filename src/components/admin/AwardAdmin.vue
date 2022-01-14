@@ -47,6 +47,12 @@
               >
                 Delete
               </button>
+              <button
+                class="p-4 bg-blue-400 rounded-lg"
+                @click="viewPrintSheet"
+              >
+                Print View
+              </button>
             </td>
           </tr>
         </tbody>
@@ -58,9 +64,10 @@
 import { Award, AwkwardApi } from "@/api/AwkwardApi";
 import { ref } from "vue";
 import CreateAwardForm from "@/components/forms/CreateAwardForm.vue";
+import { useRouter } from "vue-router";
 const api = new AwkwardApi();
 const activeAwards = ref([] as Award[]);
-
+const router = useRouter();
 api
   .getAllAwards()
   .then((awards) => {
@@ -70,6 +77,13 @@ api
   .catch((error) => {
     console.log(error);
   });
+
+function viewPrintSheet() {
+  router.push({
+    name: "Print",
+    params: { size: 200, help: "Here is the help", anchor: "just-testing" }
+  });
+}
 
 async function destroy(id: number): Promise<void> {
   try {

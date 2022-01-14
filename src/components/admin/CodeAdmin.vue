@@ -35,7 +35,14 @@
             </td>
             <td
               class="border border-emerald-500 px-4 py-2 text-emerald-600 font-medium"
-            ></td>
+            >
+              <button
+                class="p-4 bg-blue-400 rounded-lg"
+                @click="viewPrintSheet"
+              >
+                Print View
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -48,12 +55,21 @@ import { AwkwardApi, Objective } from "@/api/AwkwardApi";
 import QrcodeVue from "qrcode.vue";
 import PointsHubVue from "./PointsHub.vue";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 const current = ref({ results: [] as Objective[] });
+const router = useRouter();
 
 const api = new AwkwardApi();
 api.getAllObjectives().then((response) => {
   console.log(response);
   current.value = response;
 });
+
+function viewPrintSheet() {
+  router.push({
+    name: "Print",
+    params: { size: 200, help: "Here is the help", anchor: "just-testing" }
+  });
+}
 </script>

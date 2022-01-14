@@ -1,12 +1,28 @@
-<template></template>
+<template>
+  <QrcodeVue
+    class="mb-6"
+    :render-as="'svg'"
+    :size="size"
+    :value="completeUrl"
+  ></QrcodeVue>
+  <h2 class="text-2xl potterize" v-if="help">
+    {{ help }}
+  </h2>
+</template>
 <script lang="ts" setup>
 import QrcodeVue from "qrcode.vue";
+import { computed } from "vue";
 const props = defineProps({
-  size: String,
-  helpText: String,
+  size: Number,
+  help: String,
+  anchor: String,
   extra: {
     type: String,
-    required: false,
-  },
+    required: false
+  }
 });
+
+const completeUrl = computed(
+  () => `http://localhost:8080/scan/${props.anchor}`
+);
 </script>
