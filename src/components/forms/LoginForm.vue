@@ -47,7 +47,7 @@ async function login() {
   try {
     errorMessage.value = "";
     showError.value = false;
-    const tokens = await store.login(email.value, password.value);
+    const tokens = await store.login(email.value.toLowerCase(), password.value);
     console.log("here are the tokens");
     console.log(tokens);
     router.push("/cup");
