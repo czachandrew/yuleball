@@ -2,8 +2,8 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import Router from "@/router/index";
 import { useStore } from "@/store/index";
 
-const baseUrl = "http://127.0.0.1:8000/api/";
-// const baseUrl = "https://yule-ball.herokuapp.com/api/";
+// const baseUrl = "http://127.0.0.1:8000/api/";
+const baseUrl = "https://yule-ball.herokuapp.com/api/";
 
 const axiosInstance = axios.create({
   baseURL: baseUrl,
