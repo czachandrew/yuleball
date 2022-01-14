@@ -16,7 +16,7 @@
       type="password"
     />
     <br />
-    Error goes below
+
     <p class="text-red-800 font-bold" v-if="showError">{{ errorMessage }}</p>
     <button
       class="bg-blue-400 text-white hover:bg-blue-700 hover:text-gray-200 p-2 font-bold block mx-auto mt-3 rounded-lg px-5"
@@ -45,12 +45,17 @@ const api = new AwkwardApi();
 
 async function login() {
   try {
+    errorMessage.value = "";
+    showError.value = false;
     const tokens = await store.login(email.value, password.value);
     console.log("here are the tokens");
     console.log(tokens);
     router.push("/cup");
   } catch (error) {
+    console.log("error has been caught in form");
     console.log(error);
+    showError.value = true;
+    errorMessage.value = "Check email and password and try again";
   }
   // try {
   //   const token = await api.login(email.value, password.value);

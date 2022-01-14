@@ -43,14 +43,20 @@ export const useStore = defineStore("main", {
       try {
         const tokens = await api.login(email, password);
         const details = await api.currentUser();
+        console.log("Sending to the management call");
+        this.manageLoginSuccess(details);
         console.log(tokens);
         console.log(details);
         return tokens;
       } catch (error) {
         console.log(error);
+        throw error;
       }
     },
     manageLoginSuccess(user: User) {
+      console.log("i am manageing the success of this login");
+      console.log(user);
+      localStorage.setItem("yuleuser", user.first_name);
       this.user = user;
       this.loggedIn = true;
     },

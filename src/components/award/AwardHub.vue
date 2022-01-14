@@ -3,7 +3,7 @@
     <h1 class="text-xl potterize">Congratulations!</h1>
     <img
       class="self-center mx-auto"
-      :src="'http://127.0.0.1:8000' + award.image"
+      :src="'https://yule-ball.herokuapp.com' + award.image"
     />
     <p>
       You have found {{ award.description }} and earned

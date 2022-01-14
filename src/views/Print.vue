@@ -1,7 +1,8 @@
 <template>
   <div v-for="(award, key) in awards" :key="key">
     <h4 class="font-bold text-xl mb-6">
-      {{ award.description }} worth {{ award.amount }} points and
+      {{ award.description }} worth {{ award.amount }} {{ award.anchor }} points
+      and
       <span v-if="award.reusable">is reusable</span>
       <span v-else> is not reusable</span>
     </h4>

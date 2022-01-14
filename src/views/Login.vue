@@ -1,8 +1,5 @@
 <template>
   <LoginForm />
-  <button class="bg-blue-700 text-white p-4 w-10" @click="test" v-if="loggedIn">
-    Test
-  </button>
 </template>
 <script lang="ts" setup>
 import { computed, ref } from "vue";

@@ -54,16 +54,16 @@ const leaderBgClass = computed(() => {
   if (currentRoute.value === "HouseCup") {
     switch (cup.leader.friendly_name) {
       case "Gryfindor":
-        value = "gryfindor h-screen";
+        value = "gryfindor h-full";
         break;
       case "Slytherin":
-        value = "slytherin h-screen";
+        value = "slytherin h-full";
         break;
       case "Ravenclaw":
-        value = "ravenclaw h-screen";
+        value = "ravenclaw h-full";
         break;
       default:
-        value = "hufflepuff h-screen";
+        value = "hufflepuff h-full";
         break;
     }
   }

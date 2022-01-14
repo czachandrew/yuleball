@@ -9,10 +9,10 @@
     >
       <div :class="fillClass" :style="`height: ${filler}%`"></div>
     </div>
-    <p>{{ points }}</p>
+    <!-- <p>{{ points }}</p>
     <button class="bg-blue-700 p-5 rounded-md" @click="addPoints(10)">
       Add Points
-    </button>
+    </button> -->
   </div>
 </template>
 <script lang="ts" setup>
