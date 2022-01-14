@@ -1,6 +1,5 @@
 <template>
   <div class="bg-white p-6 text-center" v-if="loggedIn">
-    Scan Page
     <p class="font-bold text-xl potterize" v-if="!loaded">Loading</p>
     <div class="font-bold" v-else>
       <!-- {{ props.slug }} {{ returnValue.data }} {{ returnValue }} -->
@@ -12,6 +11,8 @@
       <AwardHub
         v-if="returnValue.type === 'award'"
         :award="returnValue.data"
+        :message="returnValue?.message"
+        :timer="returnValue?.for"
       ></AwardHub>
     </div>
 

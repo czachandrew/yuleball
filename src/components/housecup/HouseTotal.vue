@@ -4,7 +4,7 @@
       {{ props.house }}
     </h5>
     <div
-      class="w-20 bg-gray-200 mb-6 mr-auto ml-auto relative rounded-xl border-yellow-400 border-2"
+      class="w-20 pointcontainer mb-6 mr-auto ml-auto relative rounded-xl border-yellow-400 border-2"
       style="height: 400px"
     >
       <div :class="fillClass" :style="`height: ${filler}%`"></div>

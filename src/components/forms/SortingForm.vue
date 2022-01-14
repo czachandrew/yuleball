@@ -8,6 +8,7 @@
       </h1>
     </div>
     <div class="form" v-else>
+      <h4 class="potterize text-2xl mx-auto mb-5">Signup and be sorted!</h4>
       <div class="">
         <label class="font-bold block text-sm">Email</label>
         <input

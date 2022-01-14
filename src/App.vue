@@ -9,6 +9,7 @@
     <div class="container">
       <router-view />
     </div>
+    <div style="height: 800px"></div>
   </div>
 </template>
 <script lang="ts" setup>
@@ -54,16 +55,16 @@ const leaderBgClass = computed(() => {
   if (currentRoute.value === "HouseCup") {
     switch (cup.leader.friendly_name) {
       case "Gryfindor":
-        value = "gryfindor h-full";
+        value = "gryfindor bg-repeat";
         break;
       case "Slytherin":
-        value = "slytherin h-full";
+        value = "slytherin bg-repeat";
         break;
       case "Ravenclaw":
-        value = "ravenclaw h-full";
+        value = "ravenclaw bg-repeat";
         break;
       default:
-        value = "hufflepuff h-full";
+        value = "hufflepuff  bg-repeat";
         break;
     }
   }
