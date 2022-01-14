@@ -1,5 +1,10 @@
 import Login from "@/views/Login.vue";
-import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import {
+  createRouter,
+  createWebHashHistory,
+  RouteRecordRaw,
+  createWebHistory,
+} from "vue-router";
 import Home from "../views/Home.vue";
 import HouseCup from "../views/HouseCup.vue";
 import Maze from "../views/Maze.vue";
@@ -74,7 +79,7 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
 });
 
