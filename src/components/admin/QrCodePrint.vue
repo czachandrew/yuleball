@@ -5,7 +5,7 @@
     :size="size"
     :value="completeUrl"
   ></QrcodeVue>
-  <h2 class="text-2xl potterize" v-if="help">
+  <h2 class="text-2xl mt-6 potterize" v-if="help">
     {{ help }}
   </h2>
 </template>
@@ -18,11 +18,11 @@ const props = defineProps({
   anchor: String,
   extra: {
     type: String,
-    required: false
-  }
+    required: false,
+  },
 });
 
 const completeUrl = computed(
-  () => `http://localhost:8080/scan/${props.anchor}`
+  () => `https://compassionate-mclean-4f6bc3.netlify.app/scan/${props.anchor}`
 );
 </script>

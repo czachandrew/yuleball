@@ -8,12 +8,13 @@ import Admin from "../views/Admin.vue";
 import Register from "../views/Register.vue";
 import StaffVue from "@/views/Staff.vue";
 import QrCodePrint from "@/components/admin/QrCodePrint.vue";
+import Print from "@/views/Print.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
   },
   {
     path: "/about",
@@ -22,54 +23,59 @@ const routes: Array<RouteRecordRaw> = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+      import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
     path: "/cup",
     name: "HouseCup",
-    component: HouseCup
+    component: HouseCup,
   },
   {
     path: "/maze",
     name: "Maze",
-    component: Maze
+    component: Maze,
   },
   {
     path: "/login",
     name: "Login",
-    component: Login
+    component: Login,
   },
   {
     path: "/scan/:slug",
     props: true,
     name: "Scan",
-    component: ScanManager
+    component: ScanManager,
   },
   {
     path: "/admin",
     name: "Admin",
-    component: Admin
+    component: Admin,
   },
   {
     path: "/register",
     name: "Register",
-    component: Register
+    component: Register,
   },
   {
     path: "/staff",
     name: "Staff",
-    component: StaffVue
+    component: StaffVue,
   },
   {
     path: "/print/:size/:help/:anchor/",
     name: "Print",
-    component: QrCodePrint
-  }
+    component: QrCodePrint,
+  },
+  {
+    path: "/printall",
+    name: "Print All",
+    component: Print,
+  },
 ];
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
 });
 
 export default router;
