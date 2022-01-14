@@ -29,6 +29,21 @@ api.getHouses().then((response) => {
   }
 });
 
+function refresh() {
+  api.getHouses().then((response) => {
+    console.log(response.results);
+    for (let index = 0; index < response.results.length; index++) {
+      const element = response.results[index];
+      console.log(element);
+      store.setPoints(element.name.toLowerCase(), element.points);
+    }
+  });
+}
+
+const interval = setInterval(() => {
+  refresh();
+}, 300000);
+
 const pointTotal = computed(() => store.totalPoints);
 const leader = computed(() => store.leader);
 </script>
