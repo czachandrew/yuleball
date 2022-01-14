@@ -1,6 +1,10 @@
 <template>
   <div v-for="(award, key) in awards" :key="key">
-    <h4 class="font-bold text-xl mb-6">{{ award.description }}</h4>
+    <h4 class="font-bold text-xl mb-6">
+      {{ award.description }} worth {{ award.amount }} points and
+      <span v-if="award.reusable">is reusable</span>
+      <span v-else> is not reusable</span>
+    </h4>
     <div class="flex flex-auto">
       <QrcodeVue
         :size="100"

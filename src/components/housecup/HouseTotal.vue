@@ -31,8 +31,8 @@ const cupStore = useHousecup();
 
 const points = computed(() => cupStore.housePoints(props.house as House));
 const filler = computed(() => {
-  if (cupStore.totalPoints < 4000) {
-    return (points.value / 4000) * 100;
+  if (cupStore.totalPoints < 2000) {
+    return (points.value / 2000) * 100;
   } else {
     return (points.value / cupStore.totalPoints) * 100;
   }
