@@ -11,6 +11,10 @@
     </p>
   </div>
   <div v-else class="container mx-auto my-auto">
+    <img
+      src="../../assets/granger.jpeg"
+      class="text-center img-fluid mb-5 h-60 mx-auto rounded-lg"
+    />
     <h4 class="text-2xl potterize">
       Easy there Grainger save some points for the rest of us.
     </h4>
