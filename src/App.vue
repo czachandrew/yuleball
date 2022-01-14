@@ -23,7 +23,7 @@ import { useRouter } from "vue-router";
 Pusher.logToConsole = true;
 
 const pusher = new Pusher("826e6461d4ededca1c3a", {
-  cluster: "mt1"
+  cluster: "mt1",
 });
 
 const channel = pusher.subscribe("house-points");
@@ -32,7 +32,7 @@ channel.bind("add", (data: any) => {
   cup.managePointIncrease({
     house: data.house_data.name.toLowerCase(),
     points: data.amount,
-    from: data.user
+    from: data.user,
   });
 });
 
@@ -42,7 +42,10 @@ const router = useRouter();
 console.log(router.currentRoute.value);
 
 const userName = computed(() => store.user?.first_name);
-const currentRoute = computed(() => router.currentRoute.value.name);
+const currentRoute = computed(() => {
+  if (router.currentRoute.value.name) return router.currentRoute.value.name;
+  else return "/";
+});
 
 // const leaderBgClass = ref("hufflepuff");
 

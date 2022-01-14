@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("http://fonts.cdnfonts.com/css/harry-potter");
+@import url("https://fonts.cdnfonts.com/css/harry-potter");
 
 .ruby {
   background-image: url("./assets/ruby.jpeg");
