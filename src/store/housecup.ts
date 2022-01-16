@@ -6,6 +6,9 @@ export enum House {
   Hufflepuff = "hufflepuff",
   Slytherin = "slytherin",
   Ravenclaw = "ravenclaw",
+  Hogwarts = "hogwarts",
+  Durmstrang = "durmstrang",
+  Beauxbatons = "beauxbatons"
 }
 
 interface Score {
@@ -20,6 +23,10 @@ interface State {
   hufflepuff: Score;
   slytherin: Score;
   ravenclaw: Score;
+  hogwarts: Score;
+  durmstrang: Score;
+  beauxbatons: Score;
+  mode: string;
 }
 
 export interface PointsObject {
@@ -49,34 +56,62 @@ export const useHousecup = defineStore("housecup", {
       id: 1,
       points: 0,
       ratio: 0,
-      friendly_name: "Gryfindor",
+      friendly_name: "Gryfindor"
     },
     hufflepuff: {
       id: 2,
       points: 0,
       ratio: 0,
-      friendly_name: "Hufflepuff",
+      friendly_name: "Hufflepuff"
     },
     slytherin: {
       id: 3,
       points: 1,
       ratio: 0,
-      friendly_name: "Slytherin",
+      friendly_name: "Slytherin"
     },
     ravenclaw: {
       id: 4,
       points: 0,
       ratio: 0,
-      friendly_name: "Ravenclaw",
+      friendly_name: "Ravenclaw"
     },
+    hogwarts: {
+      id: 5,
+      points: 0,
+      ratio: 0,
+      friendly_name: "Hogwarts"
+    },
+    durmstrang: {
+      id: 6,
+      points: 0,
+      ratio: 0,
+      friendly_name: "Durmstrang"
+    },
+    beauxbatons: {
+      id: 7,
+      points: 0,
+      ratio: 0,
+      friendly_name: "Beauxbatons"
+    },
+    mode: "triwizard"
   }),
   getters: {
     totalPoints: (state: State) => {
-      const total =
-        state.gryfindor.points +
-        state.hufflepuff.points +
-        state.slytherin.points +
-        state.ravenclaw.points;
+      let total = 0;
+      if (state.mode === "house") {
+        total =
+          state.gryfindor.points +
+          state.hufflepuff.points +
+          state.slytherin.points +
+          state.ravenclaw.points;
+      } else {
+        total =
+          state.durmstrang.points +
+          state.hogwarts.points +
+          state.beauxbatons.points;
+      }
+
       return total;
     },
     housePoints: (state: State) => (house: House) => {
@@ -90,15 +125,19 @@ export const useHousecup = defineStore("housecup", {
       return state[house].id;
     },
     leader: (state: State) => {
-      const array = [
+      let array = [
         state.gryfindor,
         state.hufflepuff,
         state.slytherin,
-        state.ravenclaw,
+        state.ravenclaw
       ];
+      if (state.mode == "triwizard") {
+        array = [];
+        array = [state.hogwarts, state.durmstrang, state.beauxbatons];
+      }
       array.sort((a, b) => (a.points < b.points ? 1 : -1));
       return array[0];
-    },
+    }
   },
   actions: {
     setPoints(house: House, points: number) {
@@ -115,6 +154,15 @@ export const useHousecup = defineStore("housecup", {
     },
     addPointsToRavenclaw(points: number) {
       this[House.Ravenclaw].points += points;
+    },
+    addPointsToHogwarts(points: number) {
+      this[House.Hogwarts].points += points;
+    },
+    addPointsToDurmstrang(points: number) {
+      this[House.Durmstrang].points += points;
+    },
+    addPointsToBeauxbatons(points: number) {
+      this[House.Beauxbatons].points += points;
     },
     managePointIncrease(pointsObject: PointsObject): void {
       let success = false;
@@ -135,6 +183,18 @@ export const useHousecup = defineStore("housecup", {
           success = true;
           this.addPointsToRavenclaw(pointsObject.points);
           break;
+        case House.Hogwarts:
+          success = true;
+          this.addPointsToHogwarts(pointsObject.points);
+          break;
+        case House.Durmstrang:
+          success = true;
+          this.addPointsToDurmstrang(pointsObject.points);
+          break;
+        case House.Beauxbatons:
+          success = true;
+          this.addPointsToBeauxbatons(pointsObject.points);
+          break;
         default:
           break;
       }
@@ -150,11 +210,11 @@ export const useHousecup = defineStore("housecup", {
           } points have been awarded to ${capitalizeFirstLetter(
             pointsObject.house
           )}!`,
-          timestamp: "Just Now",
+          timestamp: "Just Now"
         });
       }
 
       // adjust all ratios
-    },
-  },
+    }
+  }
 });

@@ -23,8 +23,8 @@ import { computed, ref } from "vue";
 const props = defineProps({
   house: {
     type: String,
-    required: true,
-  },
+    required: true
+  }
 });
 
 const cupStore = useHousecup();
@@ -53,6 +53,15 @@ const fillClass = computed(() => {
     case "ravenclaw":
       className += " saphire";
       break;
+    case "beauxbatons":
+      className += " saphire";
+      break;
+    case "hogwarts":
+      className += " ruby";
+      break;
+    case "durmstrang":
+      className += " emerald";
+      break;
     default:
       break;
   }
@@ -62,7 +71,7 @@ const fillClass = computed(() => {
 const addPoints = (amt: number) => {
   cupStore.managePointIncrease({
     house: props.house as House,
-    points: amt,
+    points: amt
   });
 };
 </script>

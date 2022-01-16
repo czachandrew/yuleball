@@ -26,7 +26,9 @@
         />
       </div>
       <div class="">
-        <label class="font-bold block text-sm">Choose Your House</label>
+        <label class="font-bold block text-sm"
+          >Choose Your School to support</label
+        >
         <select
           v-model="house"
           class="border-2 border-gray-500 rounded-lg p-2 m-2 max-w-full"
@@ -74,10 +76,9 @@ import { useRouter } from "vue-router";
 const api = new AwkwardApi();
 
 const houses = [
-  { id: 1, name: "Gryfindor" },
-  { id: 3, name: "Slytherin" },
-  { id: 2, name: "Hufflepuff" },
-  { id: 4, name: "Ravenclaw" },
+  { id: 5, name: "Hogwarts" },
+  { id: 6, name: "Durmstrang" },
+  { id: 7, name: "Beauxbatons" }
 ];
 
 const email = ref("");

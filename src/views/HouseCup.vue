@@ -6,11 +6,11 @@
   >
     Leader: {{ leader.friendly_name }}
   </p>
-  <div class="bg-cover grid grid-cols-4 gap-4">
-    <HouseTotal house="slytherin" />
-    <HouseTotal house="gryfindor" />
-    <HouseTotal house="hufflepuff" />
-    <HouseTotal house="ravenclaw" />
+  <div class="bg-cover grid grid-cols-3 gap-4">
+    <HouseTotal house="hogwarts" />
+    <HouseTotal house="durmstrang" />
+    <HouseTotal house="beauxbatons" />
+    <!-- <HouseTotal house="ravenclaw" /> -->
   </div>
 </template>
 <script lang="ts" setup>
@@ -49,7 +49,7 @@ const leader = computed(() => store.leader);
 </script>
 <style>
 .house-cup-dashboard {
-  background-image: url("../assets/gryfindor-hogwarts-house.jpeg");
+  background-image: url("../assets/great-hall.jpeg");
 }
 
 .leader-background {
