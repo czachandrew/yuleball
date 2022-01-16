@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h5 class="potterize font-bold text-2xl text-yellow-500">
-      {{ props.house }}
+    <h5 class="potterize font-bold text-3xl text-yellow-500">
+      {{ capitalize(props.house) }}
     </h5>
     <div
       class="w-20 pointcontainer mb-6 mr-auto ml-auto relative rounded-xl border-yellow-400 border-2"
@@ -28,6 +28,11 @@ const props = defineProps({
 });
 
 const cupStore = useHousecup();
+
+function capitalize(word: string) {
+  const lower = word.toLowerCase();
+  return word.charAt(0).toUpperCase() + lower.slice(1);
+}
 
 const points = computed(() => cupStore.housePoints(props.house as House));
 const filler = computed(() => {
