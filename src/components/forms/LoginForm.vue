@@ -50,7 +50,7 @@ async function login() {
     const tokens = await store.login(email.value.toLowerCase(), password.value);
     console.log("here are the tokens");
     console.log(tokens);
-    router.push("/cup");
+    router.push("/confirm");
   } catch (error) {
     console.log("error has been caught in form");
     console.log(error);

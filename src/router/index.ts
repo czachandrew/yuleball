@@ -15,6 +15,7 @@ import StaffVue from "@/views/Staff.vue";
 import QrCodePrint from "@/components/admin/QrCodePrint.vue";
 import Print from "@/views/Print.vue";
 import Quiz from "@/views/Quiz.vue";
+import Confirm from "@/views/Confirm.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -81,6 +82,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/quiz",
     name: "Quiz",
     component: Quiz
+  },
+  {
+    path: "/confirm",
+    name: "Confirm",
+    component: Confirm
   }
 ];
 
