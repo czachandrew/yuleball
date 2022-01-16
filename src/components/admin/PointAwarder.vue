@@ -1,5 +1,6 @@
 <template>
   <div>
+    <label class="form-label">Points to add</label>
     <input
       type="number"
       v-model="amount"
@@ -20,14 +21,17 @@ enum HouseColor {
   slytherin = "bg-green-500",
   hufflepuff = "bg-yellow-500",
   ravenclaw = "bg-blue-500",
+  hogwarts = "bg-red-500",
+  durmstrang = "bg-green-500",
+  beauxbatons = "bg-blue-500"
 }
 
 const props = defineProps({
   points: Number,
   house: {
     type: String as PropType<House>,
-    required: true,
-  },
+    required: true
+  }
 });
 
 const api = new AwkwardApi();
@@ -35,7 +39,7 @@ const cup = useHousecup();
 const working = ref(false);
 
 const classString = computed(() => {
-  let base = " font-bold potterize text-xl px-4 py-2 rounded-xl";
+  let base = " font-bold potterize text-xl px-6 py-4 rounded-xl";
   const color = HouseColor[props.house];
   const string = color + base;
   return string;
